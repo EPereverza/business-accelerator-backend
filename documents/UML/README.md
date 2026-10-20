@@ -1,3 +1,119 @@
+### **Диаграмма использования**
+
+![Диаграмма использования](img/UMLuse.png)
+
+```plantuml
+@startuml
+title Диаграмма вариантов использования: Платформа бизнес-акселератора
+
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Участник\n(стартап)" as Startup
+actor "Спонсор" as Sponsor
+actor "Эксперт" as Expert
+actor "Инвестор" as Investor
+actor "Администратор\nплатформы" as Admin
+
+rectangle "Платформа бизнес-акселератора" {
+
+  package "Приём и отбор заявок" {
+    usecase "Подать заявку" as UC1
+    usecase "Пройти скрининг\nзаявки" as UC2
+    usecase "Оценить заявку" as UC3
+    usecase "Получить решение\nпо заявке" as UC4
+    usecase "Скорринг и отбор" as UC5
+  }
+
+  package "Акселерация и демо-день" {
+    usecase "Участвовать в программе" as UC6
+    usecase "Подать прогресс и отчёты" as UC7
+    usecase "Назначить менторов" as UC8
+    usecase "Презентовать проект\nна демо-дне" as UC9
+    usecase "Просмотреть демо-день" as UC10
+    usecase "Направить инвестиционное\nпредложение" as UC11
+    usecase "Подтвердить сделку" as UC12
+    usecase "Получить уведомление\nо выпуске" as UC13
+  }
+
+  package "Поиск спонсора" {
+    usecase "Просмотреть каталог\nспонсоров" as UC14
+    usecase "Пройти тест\nна совместимость" as UC15
+    usecase "Инициировать заявку\nспонсору" as UC16
+    usecase "Получить ответ\nспонсора" as UC17
+  }
+
+  package "Поиск перспективных проектов" {
+    usecase "Просмотреть базу\nпроектов" as UC18
+    usecase "Открыть карточку\nпроекта" as UC19
+    usecase "Инициировать контакт\nс проектом" as UC20
+  }
+
+  package "Уведомления и администрирование" {
+    usecase "Получать уведомления" as UC21
+    usecase "Управлять пользователями\nи ролями" as UC22
+    usecase "Настраивать пороги\nскоринга" as UC23
+  }
+}
+
+' --- Участник ---
+Startup --> UC1
+Startup --> UC4
+Startup --> UC6
+Startup --> UC7
+Startup --> UC9
+Startup --> UC13
+Startup --> UC14
+Startup --> UC15
+Startup --> UC16
+Startup --> UC17
+Startup --> UC21
+
+' --- Спонсор ---
+Sponsor --> UC18
+Sponsor --> UC19
+Sponsor --> UC20
+Sponsor --> UC21
+
+' --- Эксперт ---
+Expert --> UC3
+Expert --> UC8
+Expert --> UC21
+
+' --- Инвестор ---
+Investor --> UC10
+Investor --> UC11
+Investor --> UC12
+Investor --> UC21
+
+' --- Администратор ---
+Admin --> UC22
+Admin --> UC23
+Admin --> UC21
+
+' --- Связи include / extend ---
+UC1 ..> UC2 : <<include>>
+UC2 ..> UC5 : <<include>>
+UC3 ..> UC5 : <<include>>
+UC5 ..> UC4 : <<include>>
+
+UC14 ..> UC15 : <<extend>>\n[пользователь не уверен\nв отрасли]
+UC16 ..> UC17 : <<include>>
+UC16 ..> UC2 : <<include>>
+
+UC19 ..> UC20 : <<extend>>\n[профиль доступен]
+UC18 ..> UC19 : <<include>>
+
+UC11 ..> UC12 : <<include>>
+UC12 ..> UC13 : <<include>>
+
+@enduml
+```
+
+### **Диаграмма использования с уклоном в техническую часть**
+
+В данный момент не реализовано!!!
+
 ### **Диаграмма последовательности приёма заявок**
 
 ![Диаграмма последовательности приема заявок](img/UMLposledZayavki.png)
